@@ -1,0 +1,113 @@
+### Sale Module Tests
+### Base URL Configuration
+@baseUrl = http://localhost:8080
+@salePath = /sale
+
+POST {{baseUrl}}{{salePath}}/record
+Content-Type: application/json
+
+{
+  "productID": 6,
+  "quantitySold": 2,
+  "saleDate": "2025-05-20"
+}
+
+
+# # ### ============================================
+# # ### 1. RECORD SALE - Valid Request
+# # ### ============================================
+# POST {{baseUrl}}{{salePath}}/record
+# Content-Type: application/json
+
+# {
+#   "productID": 1,
+#   "quantitySold": 5
+# }
+
+# ### 
+# # ### ============================================
+# # ### 2. RECORD SALE - Valid Request (Second Sale)
+# # ### ============================================
+# POST {{baseUrl}}{{salePath}}/record
+# Content-Type: application/json
+
+# {
+#   "productID": 2,
+#   "quantitySold": 10
+# }
+
+# ### 
+# # ### ============================================
+# # ### 3. RECORD SALE - Valid Request (Third Sale)
+# # ### ============================================
+# POST {{baseUrl}}{{salePath}}/record
+# Content-Type: application/json
+
+# {
+#   "productID": 3,
+#   "quantitySold": 8
+# }
+
+# ### 
+# # ### ============================================
+# # ### 4. GET ALL SALES - Retrieve all sales records
+# # ### ============================================
+# GET {{baseUrl}}{{salePath}}/
+
+# ### 
+# # ### ============================================
+# # ### 5. GET SALES BY PRODUCT - Retrieve sales for product ID 1
+# # ### ============================================
+# GET {{baseUrl}}{{salePath}}/product/1
+
+# ### 
+# # ### ============================================
+# # ### 6. GET SALES BY PRODUCT - Retrieve sales for product ID 2
+# # ### ============================================
+# GET {{baseUrl}}{{salePath}}/product/2
+
+# ### 
+# # ### ============================================
+# # ### 7. RECORD SALE - Missing productID (should fail)
+# # ### ============================================
+# POST {{baseUrl}}{{salePath}}/record
+# Content-Type: application/json
+
+# {
+#   "quantitySold": 5
+# }
+
+# ### 
+# # ### ============================================
+# # ### 8. RECORD SALE - Missing quantitySold (should fail)
+# # ### ============================================
+# POST {{baseUrl}}{{salePath}}/record
+# Content-Type: application/json
+
+# {
+#   "productID": 1
+# }
+
+# ### 
+# # ### ============================================
+# # ### 9. RECORD SALE - Invalid productID (zero)
+# # ### ============================================
+# POST {{baseUrl}}{{salePath}}/record
+# Content-Type: application/json
+
+# {
+#   "productID": 0,
+#   "quantitySold": 5
+# }
+
+# ### 
+# # ### ============================================
+# # ### 10. RECORD SALE - Invalid quantitySold (zero)
+# # ### ============================================
+# POST {{baseUrl}}{{salePath}}/record
+# Content-Type: application/json
+
+# {
+#   "productID": 1,
+#   "quantitySold": 0
+# }

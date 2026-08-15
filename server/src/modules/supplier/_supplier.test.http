@@ -1,0 +1,16 @@
+### Supplier Module Tests
+### Base URL Configuration
+@baseUrl = http://localhost:8080
+@supplierPath = /supplier
+
+
+
+POST {{baseUrl}}{{supplierPath}}/create
+Content-Type: application/json
+
+{
+  "supplierName": "FreshFoods",
+  "contactNumber": "01001234567"
+}
+### id - 20
+

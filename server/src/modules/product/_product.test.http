@@ -1,0 +1,47 @@
+# ### Product Module Tests
+# ### Base URL Configuration
+@baseUrl = http://localhost:8080
+@productPath = /product
+
+
+POST {{baseUrl}}{{productPath}}/create
+Content-Type: application/json
+
+{
+  "productName": "Milk",
+  "price": 15.00,
+  "stockQuantity": 50,
+  "supplierID": 20
+}
+
+### 
+POST {{baseUrl}}{{productPath}}/create
+Content-Type: application/json
+
+{
+  "productName": "Bread",
+  "price": 10.00,
+  "stockQuantity": 30,
+  "supplierID": 20
+}
+
+### 
+POST {{baseUrl}}{{productPath}}/create
+Content-Type: application/json
+
+{
+  "productName": "Eggs",
+  "price": 20.00,
+  "stockQuantity": 40,
+  "supplierID": 20
+}
+
+###
+
+PATCH {{baseUrl}}{{productPath}}/update/1
+Content-Type: application/json
+
+{
+  "stockQuantity": -100
+}
+

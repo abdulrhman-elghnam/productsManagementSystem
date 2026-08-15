@@ -1,0 +1,602 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Assignment API Documentation",
+    "description": "Complete API documentation for Product, Supplier, Sale, and Report management system",
+    "version": "1.0.0",
+    "contact": {
+      "name": "API Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Development Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Products",
+      "description": "Product management endpoints"
+    },
+    {
+      "name": "Suppliers",
+      "description": "Supplier management endpoints"
+    },
+    {
+      "name": "Sales",
+      "description": "Sale recording and retrieval endpoints"
+    },
+    {
+      "name": "Reports",
+      "description": "Report and analytics endpoints"
+    }
+  ],
+  "paths": {
+    "/product/create": {
+      "post": {
+        "tags": ["Products"],
+        "summary": "Create a new product",
+        "description": "Creates a new product with the provided details",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["productName", "price", "stockQuantity", "supplierID"],
+                "properties": {
+                  "productName": {
+                    "type": "string",
+                    "description": "Name of the product"
+                  },
+                  "price": {
+                    "type": "number",
+                    "format": "float",
+                    "minimum": 0,
+                    "description": "Price of the product"
+                  },
+                  "stockQuantity": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Stock quantity available"
+                  },
+                  "supplierID": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Supplier ID for this product"
+                  }
+                }
+              },
+              "example": {
+                "productName": "Milk",
+                "price": 15.00,
+                "stockQuantity": 50,
+                "supplierID": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "statusCode": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/product/all": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get all products",
+        "description": "Retrieves all products in the system",
+        "responses": {
+          "200": {
+            "description": "List of all products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{id}": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get product by ID",
+        "description": "Retrieves a specific product by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/product/update/{productID}": {
+      "patch": {
+        "tags": ["Products"],
+        "summary": "Update product",
+        "description": "Updates product details",
+        "parameters": [
+          {
+            "name": "productID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Product ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "productName": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number",
+                    "format": "float",
+                    "minimum": 0
+                  },
+                  "stockQuantity": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "supplierID": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product updated successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/product/delete/{productID}": {
+      "delete": {
+        "tags": ["Products"],
+        "summary": "Delete product",
+        "description": "Deletes a product by ID",
+        "parameters": [
+          {
+            "name": "productID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product deleted successfully"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/supplier/create": {
+      "post": {
+        "tags": ["Suppliers"],
+        "summary": "Create a new supplier",
+        "description": "Creates a new supplier with the provided details",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["supplierName", "contactNumber"],
+                "properties": {
+                  "supplierName": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 255,
+                    "description": "Name of the supplier"
+                  },
+                  "contactNumber": {
+                    "type": "string",
+                    "maxLength": 15,
+                    "pattern": "^[0-9]+$",
+                    "description": "Contact number (numeric only)"
+                  }
+                }
+              },
+              "example": {
+                "supplierName": "FreshFoods",
+                "contactNumber": "01001234567"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Supplier created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/supplier/all": {
+      "get": {
+        "tags": ["Suppliers"],
+        "summary": "Get all suppliers",
+        "description": "Retrieves all suppliers in the system",
+        "responses": {
+          "200": {
+            "description": "List of all suppliers"
+          }
+        }
+      }
+    },
+    "/supplier/{id}": {
+      "get": {
+        "tags": ["Suppliers"],
+        "summary": "Get supplier by ID",
+        "description": "Retrieves a specific supplier by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Supplier ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Supplier found"
+          },
+          "404": {
+            "description": "Supplier not found"
+          }
+        }
+      }
+    },
+    "/supplier/update/{supplierID}": {
+      "patch": {
+        "tags": ["Suppliers"],
+        "summary": "Update supplier",
+        "description": "Updates supplier details",
+        "parameters": [
+          {
+            "name": "supplierID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Supplier ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "supplierName": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 255
+                  },
+                  "contactNumber": {
+                    "type": "string",
+                    "maxLength": 15,
+                    "pattern": "^[0-9]+$"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Supplier updated successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/supplier/delete/{supplierID}": {
+      "delete": {
+        "tags": ["Suppliers"],
+        "summary": "Delete supplier",
+        "description": "Deletes a supplier by ID",
+        "parameters": [
+          {
+            "name": "supplierID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Supplier ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Supplier deleted successfully"
+          },
+          "404": {
+            "description": "Supplier not found"
+          }
+        }
+      }
+    },
+    "/sale/record": {
+      "post": {
+        "tags": ["Sales"],
+        "summary": "Record a new sale",
+        "description": "Records a new sale transaction",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["productID", "quantitySold"],
+                "properties": {
+                  "productID": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Product ID"
+                  },
+                  "quantitySold": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Quantity sold"
+                  }
+                }
+              },
+              "example": {
+                "productID": 1,
+                "quantitySold": 5
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sale recorded successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/sale": {
+      "get": {
+        "tags": ["Sales"],
+        "summary": "Get all sales",
+        "description": "Retrieves all sales records",
+        "responses": {
+          "200": {
+            "description": "List of all sales"
+          }
+        }
+      }
+    },
+    "/sale/product/{productID}": {
+      "get": {
+        "tags": ["Sales"],
+        "summary": "Get sales by product ID",
+        "description": "Retrieves sales records for a specific product",
+        "parameters": [
+          {
+            "name": "productID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sales records found"
+          }
+        }
+      }
+    },
+    "/report/totalSales": {
+      "get": {
+        "tags": ["Reports"],
+        "summary": "Get total sales quantity",
+        "description": "Retrieves the total quantity sold across all products",
+        "responses": {
+          "200": {
+            "description": "Total sales quantity retrieved"
+          }
+        }
+      }
+    },
+    "/report/highestStock": {
+      "get": {
+        "tags": ["Reports"],
+        "summary": "Get product with highest stock",
+        "description": "Retrieves the product with the highest stock quantity",
+        "responses": {
+          "200": {
+            "description": "Highest stock product retrieved"
+          }
+        }
+      }
+    },
+    "/report/suppliersStarting-F": {
+      "get": {
+        "tags": ["Reports"],
+        "summary": "Get suppliers starting with F",
+        "description": "Retrieves suppliers whose names start with the letter F",
+        "responses": {
+          "200": {
+            "description": "Suppliers starting with F retrieved"
+          }
+        }
+      }
+    },
+    "/report/neverSold": {
+      "get": {
+        "tags": ["Reports"],
+        "summary": "Get products that were never sold",
+        "description": "Retrieves products that have no sales records",
+        "responses": {
+          "200": {
+            "description": "Never sold products retrieved"
+          }
+        }
+      }
+    },
+    "/report/sales": {
+      "get": {
+        "tags": ["Reports"],
+        "summary": "Get all sales report",
+        "description": "Retrieves a comprehensive sales report",
+        "responses": {
+          "200": {
+            "description": "Sales report retrieved"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "productID": {
+            "type": "integer"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "format": "float"
+          },
+          "stockQuantity": {
+            "type": "integer"
+          },
+          "supplierID": {
+            "type": "integer"
+          }
+        }
+      },
+      "Supplier": {
+        "type": "object",
+        "properties": {
+          "supplierID": {
+            "type": "integer"
+          },
+          "supplierName": {
+            "type": "string"
+          },
+          "contactNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "Sale": {
+        "type": "object",
+        "properties": {
+          "saleID": {
+            "type": "integer"
+          },
+          "productID": {
+            "type": "integer"
+          },
+          "quantitySold": {
+            "type": "integer"
+          },
+          "saleDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+node_modules/
+
+# Environment variables and secrets (CRITICAL for security)
+.env
+.env.development
+.env.production
+*.env
+*.env.*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build directories (if using TypeScript/build tools)
+dist/
+build/
+.node_repl_history
+
+# IDE and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,302 @@
+{
+  "info": {
+    "_postman_id": "assignment-api-collection",
+    "name": "Assignment API Collection",
+    "description": "Complete API documentation for Product, Supplier, Sale, and Report modules",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Product Module",
+      "description": "Product management endpoints",
+      "item": [
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productName\": \"Milk\",\n  \"price\": 15.00,\n  \"stockQuantity\": 50,\n  \"supplierID\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/product/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["product", "create"]
+            }
+          }
+        },
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/product/all",
+              "host": ["{{baseUrl}}"],
+              "path": ["product", "all"]
+            }
+          }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/product/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["product", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productName\": \"Updated Milk\",\n  \"price\": 18.00,\n  \"stockQuantity\": 60,\n  \"supplierID\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/product/update/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["product", "update", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/product/delete/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["product", "delete", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Supplier Module",
+      "description": "Supplier management endpoints",
+      "item": [
+        {
+          "name": "Create Supplier",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"supplierName\": \"FreshFoods\",\n  \"contactNumber\": \"01001234567\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/supplier/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["supplier", "create"]
+            }
+          }
+        },
+        {
+          "name": "Get All Suppliers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/supplier/all",
+              "host": ["{{baseUrl}}"],
+              "path": ["supplier", "all"]
+            }
+          }
+        },
+        {
+          "name": "Get Supplier by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/supplier/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["supplier", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Supplier",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"supplierName\": \"FreshFoods Updated\",\n  \"contactNumber\": \"01009876543\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/supplier/update/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["supplier", "update", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Supplier",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/supplier/delete/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["supplier", "delete", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sale Module",
+      "description": "Sale recording and retrieval endpoints",
+      "item": [
+        {
+          "name": "Record Sale",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productID\": 1,\n  \"quantitySold\": 5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sale/record",
+              "host": ["{{baseUrl}}"],
+              "path": ["sale", "record"]
+            }
+          }
+        },
+        {
+          "name": "Get All Sales",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sale",
+              "host": ["{{baseUrl}}"],
+              "path": ["sale"]
+            }
+          }
+        },
+        {
+          "name": "Get Sales by Product ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sale/product/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["sale", "product", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Report Module",
+      "description": "Report and analytics endpoints",
+      "item": [
+        {
+          "name": "Get Total Sales",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/report/totalSales",
+              "host": ["{{baseUrl}}"],
+              "path": ["report", "totalSales"]
+            }
+          }
+        },
+        {
+          "name": "Get Highest Stock Product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/report/highestStock",
+              "host": ["{{baseUrl}}"],
+              "path": ["report", "highestStock"]
+            }
+          }
+        },
+        {
+          "name": "Get Suppliers Starting with F",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/report/suppliersStarting-F",
+              "host": ["{{baseUrl}}"],
+              "path": ["report", "suppliersStarting-F"]
+            }
+          }
+        },
+        {
+          "name": "Get Never Sold Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/report/neverSold",
+              "host": ["{{baseUrl}}"],
+              "path": ["report", "neverSold"]
+            }
+          }
+        },
+        {
+          "name": "Get All Sales Report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/report/sales",
+              "host": ["{{baseUrl}}"],
+              "path": ["report", "sales"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}
